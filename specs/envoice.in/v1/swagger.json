@@ -1,0 +1,3930 @@
+{
+  "swagger": "2.0",
+  "schemes": [
+    "https"
+  ],
+  "host": "www.envoice.in",
+  "info": {
+    "contact": {
+      "x-twitter": "envoicein"
+    },
+    "description": "[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/227a811af0be3a69c9cf)\r\n<span style='margin-left: 0.5em;'>or</span>\r\n<a href='https://documenter.getpostman.com/view/3559821/envoice-api-dev/RVfqnE3a' class='openapi-button' _ngcontent-c6>View Postman docs</a>\r\n\r\n# Quickstart\r\n\r\nVisit [github](https://github.com/EmitKnowledge/Envoice) to view the quickstart tutorial.\r\n\r\n<div class='postman-tutorial'>\r\n\r\n# Tutorial for running the API in postman\r\n\r\nClick on \"\"Run in Postman\"\" button\r\n<br /><br />\r\n![postman - tutorial - 1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r\n\r\n --- \r\n\r\nA new page will open.\r\nClick the \"\"Postman for windows\"\" to run postman as a desktop app.\r\nMake sure you have already [installed](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) Postman.\r\n<br /><br />\r\n![postman - tutorial - 2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r\n\r\n --- \r\n\r\nIn chrome an alert might show up to set a default app for opening postman links. Click on \"\"Open Postman\"\".\r\n<br /><br />\r\n![postman - tutorial - 3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r\n\r\n --- \r\n\r\nThe OpenAPI specification will be imported in Postman as a new collection named \"\"Envoice api\"\"\r\n<br /><br />\r\n![postman - tutorial - 4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r\n\r\n --- \r\n\r\nWhen testing be sure to check and modify the environment variables to suit your api key and secret. The domain is set to envoice's endpoint so you don't really need to change that.  \r\n<sub>\\*Eye button in top right corner </sub>\r\n<br /><br /> \r\n![postman - tutorial - 5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r\n<br /><br /> \r\n![postman - tutorial - 6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r\n\r\n --- \r\n\r\nYou don't need to change the values of the header parameters, because they will be replaced automatically when you send a request with real values from the environment configured in the previous step.\r\n<br /><br />\r\n![postman - tutorial - 7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r\n\r\n --- \r\n\r\nModify the example data to suit your needs and send a request.\r\n<br /><br />\r\n![postman - tutorial - 8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r\n</div>\r\n\r\n# Webhooks\r\n\r\nWebhooks allow you to build or set up Envoice Apps which subscribe to invoice activities. \r\nWhen one of those events is triggered, we'll send a HTTP POST payload to the webhook's configured URL. \r\nWebhooks can be used to update an external invoice data storage.\r\n\r\nIn order to use webhooks visit [this link](/account/settings#api-tab) and add upto 10 webhook urls that will return status `200` in order to signal that the webhook is working.\r\nAll nonworking webhooks will be ignored after a certain period of time and several retry attempts.\r\nIf after several attempts the webhook starts to work, we will send you all activities, both past and present, in chronological order.\r\n\r\nThe payload of the webhook is in format:\r\n```\r\n{\r\n    Signature: \"\"sha256 string\"\",\r\n    Timestamp: \"\"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\",\r\n    Activity: {\r\n        Message: \"\"string\"\",\r\n        Link: \"\"share url\"\",\r\n        Type: int,\r\n        InvoiceNumber: \"\"string\"\",\r\n        InvoiceId: int,\r\n        Id: int,\r\n        CreatedOn: \"\"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\"\r\n    }\r\n}\r\n```            ",
+    "title": "API v1.0.0",
+    "version": "v1",
+    "x-apisguru-categories": [
+      "financial"
+    ],
+    "x-logo": {
+      "url": "https://api.apis.guru/v2/cache/logo/https_twitter.com_envoicein_profile_image.jpeg"
+    },
+    "x-origin": [
+      {
+        "format": "swagger",
+        "url": "https://www.envoice.in/docs/api/v1/specification",
+        "version": "2.0"
+      }
+    ],
+    "x-preferred": true,
+    "x-providerName": "envoice.in"
+  },
+  "securityDefinitions": {
+    "x-auth-key": {
+      "description": "Your account API key. Can be retrieved from your [account settings](/account/settings#api-tab).",
+      "in": "header",
+      "name": "x-auth-key",
+      "type": "apiKey"
+    },
+    "x-auth-secret": {
+      "description": "Your account API secret. Can be retrieved from your [account settings](/account/settings#api-tab). Keep it hidden.",
+      "in": "header",
+      "name": "x-auth-secret",
+      "type": "apiKey"
+    }
+  },
+  "paths": {
+    "/api/client/all": {
+      "get": {
+        "consumes": [],
+        "operationId": "ClientApi_All",
+        "parameters": [
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ClientDetailsApiModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return all clients for the account",
+        "tags": [
+          "Client"
+        ]
+      }
+    },
+    "/api/client/candelete": {
+      "get": {
+        "consumes": [],
+        "operationId": "ClientApi_CanDelete",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        },
+        "summary": "Check if the provided client can be deleted",
+        "tags": [
+          "Client"
+        ]
+      }
+    },
+    "/api/client/delete": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "ClientApi_Delete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "deleteModel",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientDeleteApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Delete an existing client",
+        "tags": [
+          "Client"
+        ]
+      }
+    },
+    "/api/client/details": {
+      "get": {
+        "consumes": [],
+        "operationId": "ClientApi_Details",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClientDetailsApiModel"
+            }
+          }
+        },
+        "summary": "Return client details. Activities and invoices included.",
+        "tags": [
+          "Client"
+        ]
+      }
+    },
+    "/api/client/new": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "ClientApi_New",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "client",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientCreateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Create a client",
+        "tags": [
+          "Client"
+        ]
+      }
+    },
+    "/api/client/update": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "ClientApi_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "client",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientUpdateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "Update an existing client",
+        "tags": [
+          "Client"
+        ]
+      }
+    },
+    "/api/general/countries": {
+      "get": {
+        "consumes": [],
+        "operationId": "GeneralApi_Countries",
+        "parameters": [
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/CountryDetailsApiModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return all of the platform supported countries",
+        "tags": [
+          "General"
+        ]
+      }
+    },
+    "/api/general/currencies": {
+      "get": {
+        "consumes": [],
+        "operationId": "GeneralApi_Currencies",
+        "parameters": [
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/CurrencyDetailsApiModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return all of the platform supported currencies",
+        "tags": [
+          "General"
+        ]
+      }
+    },
+    "/api/general/uilanguages": {
+      "get": {
+        "consumes": [],
+        "operationId": "GeneralApi_UiLanguages",
+        "parameters": [
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/UILanguageDetailsApiModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return all of the platform supported UI languages",
+        "tags": [
+          "General"
+        ]
+      }
+    },
+    "/api/invoice/all": {
+      "get": {
+        "consumes": [],
+        "operationId": "InvoiceApi_All",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "queryOptions.page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "queryOptions.pageSize",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListResult[Invoice]"
+            }
+          }
+        },
+        "summary": "Return all invoices for the account",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/changestatus": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "InvoiceApi_ChangeStatus",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "statusModel",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeStatusApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "Change invoice status",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/delete": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "InvoiceApi_Delete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "deleteModel",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoiceDeleteApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Delete an existing invoice",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/details": {
+      "get": {
+        "consumes": [],
+        "operationId": "InvoiceApi_Details",
+        "parameters": [
+          {
+            "description": "",
+            "format": "int32",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InvoiceFullDetailsApiModel"
+            }
+          }
+        },
+        "summary": "Return invoice data",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/new": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "InvoiceApi_New",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "invoice",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoiceCreateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          }
+        },
+        "summary": "Create an invoice",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/sendtoaccountant": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "InvoiceApi_SendToAccountant",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "invoice",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendInvoiceToAccountantApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Send the provided invoice to the accountant",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/sendtoclient": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "InvoiceApi_SendToClient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "deliveryOptions",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendInvoiceToClientApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Send the provided invoice to the client",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/status": {
+      "get": {
+        "consumes": [],
+        "operationId": "InvoiceApi_Status",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "Draft",
+                "Paid",
+                "Unpaid",
+                "Overdue"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "summary": "Retrieve the status of the invoice",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/update": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "InvoiceApi_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "invoice",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoiceUpdateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          }
+        },
+        "summary": "Update an existing invoice",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/invoice/uri": {
+      "get": {
+        "consumes": [],
+        "operationId": "InvoiceApi_Uri",
+        "parameters": [
+          {
+            "description": "",
+            "format": "int32",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InvoiceUriApiModel"
+            }
+          }
+        },
+        "summary": "Return the unique url to the client's invoice",
+        "tags": [
+          "Invoice"
+        ]
+      }
+    },
+    "/api/payment/supported": {
+      "get": {
+        "consumes": [],
+        "operationId": "PaymentApi_Supported",
+        "parameters": [
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/PaymentGatewayDetailsApiModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return all supported payment gateways (no currencies means all are supported)",
+        "tags": [
+          "Payment"
+        ]
+      }
+    },
+    "/api/tax/all": {
+      "get": {
+        "consumes": [],
+        "operationId": "TaxApi_All",
+        "parameters": [
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/TaxDetailsApiModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return all taxes for the account",
+        "tags": [
+          "Tax"
+        ]
+      }
+    },
+    "/api/tax/delete": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "TaxApi_Delete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "deleteModel",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaxDeleteApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Delete an existing tax",
+        "tags": [
+          "Tax"
+        ]
+      }
+    },
+    "/api/tax/new": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "TaxApi_New",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tax",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaxCreateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Create a tax",
+        "tags": [
+          "Tax"
+        ]
+      }
+    },
+    "/api/tax/update": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "TaxApi_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tax",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaxUpdateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "Update an existing tax",
+        "tags": [
+          "Tax"
+        ]
+      }
+    },
+    "/api/worktype/all": {
+      "get": {
+        "consumes": [],
+        "operationId": "WorkTypeApi_All",
+        "parameters": [
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/WorkTypeDetailsApiModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return all work types for the account",
+        "tags": [
+          "WorkType"
+        ]
+      }
+    },
+    "/api/worktype/delete": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "WorkTypeApi_Delete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "deleteModel",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkTypeDeleteApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Delete an existing work type",
+        "tags": [
+          "WorkType"
+        ]
+      }
+    },
+    "/api/worktype/details": {
+      "get": {
+        "consumes": [],
+        "operationId": "WorkTypeApi_Details",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "workTypeId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkTypeDetailsApiModel"
+            }
+          }
+        },
+        "summary": "Returns details for work types by Id",
+        "tags": [
+          "WorkType"
+        ]
+      }
+    },
+    "/api/worktype/new": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "WorkTypeApi_New",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "workType",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkTypeCreateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "summary": "Create a work type",
+        "tags": [
+          "WorkType"
+        ]
+      }
+    },
+    "/api/worktype/update": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "operationId": "WorkTypeApi_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "workType",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkTypeUpdateApiModel"
+            }
+          },
+          {
+            "default": "[authentication key]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "[authentication secret]",
+            "description": "",
+            "in": "header",
+            "name": "x-auth-secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "Update an existing work type",
+        "tags": [
+          "WorkType"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Activity": {
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InvoiceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InvoiceNumber": {
+          "type": "string"
+        },
+        "Link": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "RecommendedArticles": {
+          "items": {
+            "$ref": "#/definitions/Article"
+          },
+          "type": "array"
+        },
+        "Type": {
+          "enum": [
+            "Created",
+            "Draft",
+            "Cloned",
+            "SentViaEmail",
+            "SentViaSms",
+            "SentReminderViaEmail",
+            "SentReminderViaSms",
+            "Opened",
+            "Viewed",
+            "Rejected",
+            "Updated",
+            "Paid",
+            "Unpaid",
+            "Overdue",
+            "NewManualPayment",
+            "NewPaymentWithPaypal",
+            "NewPaymentWithStripe",
+            "NewPaymentWithPayoneer",
+            "SentToAccountant",
+            "DownloadedAsPdf",
+            "MarkAsPaidByTheClient",
+            "OpenedAttachment",
+            "NewPaymentWithSquare",
+            "NewPaymentWithKlikAndPay",
+            "NewPaymentWithRazorpay",
+            "NewPaymentWithWepay"
+          ],
+          "type": "string"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Article": {
+      "properties": {
+        "Activities": {
+          "items": {
+            "enum": [
+              "Created",
+              "Draft",
+              "Cloned",
+              "SentViaEmail",
+              "SentViaSms",
+              "SentReminderViaEmail",
+              "SentReminderViaSms",
+              "Opened",
+              "Viewed",
+              "Rejected",
+              "Updated",
+              "Paid",
+              "Unpaid",
+              "Overdue",
+              "NewManualPayment",
+              "NewPaymentWithPaypal",
+              "NewPaymentWithStripe",
+              "SentToAccountant",
+              "DownloadedAsPdf",
+              "TopPayingCustomers",
+              "LessPayingCustomers",
+              "TopDueCustomers",
+              "TopWorkTypes",
+              "OtherProfession",
+              "DesignAndCreativeProfession",
+              "SoftwareDevelopmentProfession",
+              "ContentWritingAndMarketingProfession",
+              "AskForFeedback",
+              "NoInvoicesInPreviousMonth",
+              "UpdatePortfolio",
+              "ShareWorkExperience",
+              "PlanTheNextWeek",
+              "InvoiceStatus",
+              "InvoiceActivities",
+              "YourCollections",
+              "LatestArticles",
+              "ShareAnArticle",
+              "InvoiceLogo",
+              "InvoiceBasicInfo",
+              "InvoiceFromInfo",
+              "InvoiceToInfo",
+              "InvoiceItemsTable",
+              "InvoiceTerms",
+              "InvoiceNotes",
+              "InvoiceStepsBeforeSendingToClient",
+              "OpenedAttachment",
+              "Freelancers",
+              "Consultants",
+              "Smes",
+              "Enterprise",
+              "ECommerce"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Content": {
+          "type": "string"
+        },
+        "Course": {
+          "$ref": "#/definitions/Course"
+        },
+        "CourseId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Documents": {
+          "items": {
+            "$ref": "#/definitions/ArticleDocument"
+          },
+          "type": "array"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ImageUrl": {
+          "type": "string"
+        },
+        "IsRecommended": {
+          "type": "boolean"
+        },
+        "Level": {
+          "enum": [
+            "Beginner",
+            "Competent",
+            "Skilled",
+            "Specialist",
+            "Brand"
+          ],
+          "type": "string"
+        },
+        "Link": {
+          "type": "string"
+        },
+        "TimeToRead": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "TotalHasHelpedYouVotes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "TotalHasHelpedYouVotesPercentage": {
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "TotalHasNotHelpedYouVotes": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ArticleDocument": {
+      "properties": {
+        "ArticleId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Extension": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ImageUrl": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "Url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ChangeStatusApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Invoice Id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Status": {
+          "description": "New status of the invoice",
+          "enum": [
+            "Draft",
+            "Paid",
+            "Unpaid",
+            "Overdue"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Client": {
+      "properties": {
+        "Address": {
+          "type": "string"
+        },
+        "CC": {
+          "type": "string"
+        },
+        "ClientCountryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ClientCurrencyId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "type": "string"
+        },
+        "UiLanguageId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Vat": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ClientCreateApiModel": {
+      "properties": {
+        "Address": {
+          "description": "Client business address",
+          "type": "string"
+        },
+        "CC": {
+          "description": "Client additional email contact for CC",
+          "type": "string"
+        },
+        "ClientCountryId": {
+          "description": "Indicates the country where the clients is from",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ClientCurrencyId": {
+          "description": "Indicates the default system currency used by the user for the client",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Email": {
+          "description": "Client email",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Name of the client",
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "description": "Client phone numer",
+          "type": "string"
+        },
+        "UiLanguageId": {
+          "description": "Hold a value of the language in which the invoice will be sent",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Vat": {
+          "description": "Client's VAT number",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ClientDeleteApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of client to be deleted",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ClientDetailsApiModel": {
+      "properties": {
+        "Address": {
+          "description": "Client business address",
+          "type": "string"
+        },
+        "CC": {
+          "description": "Client additional email contact for CC",
+          "type": "string"
+        },
+        "ClientCountryId": {
+          "description": "Indicates the country where the clients is from",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ClientCurrencyId": {
+          "description": "Indicates the default system currency used by the user for the client",
+          "format": "int32",
+          "type": "integer"
+        },
+        "CreatedOn": {
+          "description": "Date of creation",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Email": {
+          "description": "Client email",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Name of the client",
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "description": "Client phone numer",
+          "type": "string"
+        },
+        "UiLanguageId": {
+          "description": "Hold a value of the language in which the invoice will be sent",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Vat": {
+          "description": "Client's VAT number",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ClientUpdateApiModel": {
+      "properties": {
+        "Address": {
+          "description": "Client business address",
+          "type": "string"
+        },
+        "CC": {
+          "description": "Client additional email contact for CC",
+          "type": "string"
+        },
+        "ClientCountryId": {
+          "description": "Indicates the country where the clients is from",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ClientCurrencyId": {
+          "description": "Indicates the default system currency used by the user for the client",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Email": {
+          "description": "Client email",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Name of the client",
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "description": "Client phone numer",
+          "type": "string"
+        },
+        "UiLanguageId": {
+          "description": "Hold a value of the language in which the invoice will be sent",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Vat": {
+          "description": "Client's VAT number",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Country": {
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CountryDetailsApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Name of the country",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Country short code",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Course": {
+      "properties": {
+        "Articles": {
+          "items": {
+            "$ref": "#/definitions/Article"
+          },
+          "type": "array"
+        },
+        "CourseCategory": {
+          "$ref": "#/definitions/CourseCategory"
+        },
+        "CourseCategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ImageUrl": {
+          "type": "string"
+        },
+        "Level": {
+          "enum": [
+            "Beginner",
+            "Competent",
+            "Skilled",
+            "Specialist",
+            "Brand"
+          ],
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "TimeToRead": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "CourseCategory": {
+      "properties": {
+        "Courses": {
+          "items": {
+            "$ref": "#/definitions/Course"
+          },
+          "type": "array"
+        },
+        "IconClass": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Currency": {
+      "properties": {
+        "Code": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Symbol": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CurrencyApiModel": {
+      "properties": {
+        "Name": {
+          "description": "Name of the currency",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Currency short code",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CurrencyDetailsApiModel": {
+      "properties": {
+        "Code": {
+          "description": "Currency short numeric code",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Name of the country",
+          "type": "string"
+        },
+        "Symbol": {
+          "description": "Currency symbol",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Currency short alpha code",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ExternalConnection": {
+      "properties": {
+        "AccessToken": {
+          "type": "string"
+        },
+        "AccessTokenSecret": {
+          "type": "string"
+        },
+        "Data": {
+          "type": "string"
+        },
+        "ExpiresOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ExternalUserId": {
+          "type": "string"
+        },
+        "ExternalUsername": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Provider": {
+          "type": "string"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "IErrorInfo": {
+      "properties": {
+        "Code": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "FaultMessage": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "Group": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "UserVisibleMessage": {
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Invoice": {
+      "properties": {
+        "AccessToken": {
+          "type": "string"
+        },
+        "Activities": {
+          "items": {
+            "$ref": "#/definitions/Activity"
+          },
+          "type": "array"
+        },
+        "Attachments": {
+          "items": {
+            "$ref": "#/definitions/InvoiceAttachment"
+          },
+          "type": "array"
+        },
+        "ClientId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ClonedFromId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "CurrencyId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "DiscountAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "Duedate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "EnablePartialPayments": {
+          "type": "boolean"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "IssuedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Items": {
+          "items": {
+            "$ref": "#/definitions/InvoiceItem"
+          },
+          "type": "array"
+        },
+        "Notes": {
+          "type": "string"
+        },
+        "Number": {
+          "type": "string"
+        },
+        "PaymentGateways": {
+          "items": {
+            "$ref": "#/definitions/PaymentGatewayForInvoice"
+          },
+          "type": "array"
+        },
+        "Payments": {
+          "items": {
+            "$ref": "#/definitions/Payment"
+          },
+          "type": "array"
+        },
+        "PoNumber": {
+          "type": "string"
+        },
+        "RecurringProfileId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Status": {
+          "enum": [
+            "Draft",
+            "Paid",
+            "Unpaid",
+            "Overdue"
+          ],
+          "type": "string"
+        },
+        "SubTotalAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "TaxAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "Terms": {
+          "type": "string"
+        },
+        "TotalAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceActivityApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of invoice activity",
+          "format": "int32",
+          "type": "integer"
+        },
+        "InvoiceNumber": {
+          "description": "Indicates to which invoice this activity refers to",
+          "type": "string"
+        },
+        "Link": {
+          "description": "Url which point out to a certain activity action. Ex: Click to view the payment",
+          "type": "string"
+        },
+        "Message": {
+          "description": "Message associated with the activity",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Type of the activity",
+          "enum": [
+            "Created",
+            "Draft",
+            "Cloned",
+            "SentViaEmail",
+            "SentViaSms",
+            "SentReminderViaEmail",
+            "SentReminderViaSms",
+            "Opened",
+            "Viewed",
+            "Rejected",
+            "Updated",
+            "Paid",
+            "Unpaid",
+            "Overdue",
+            "NewManualPayment",
+            "NewPaymentWithPaypal",
+            "NewPaymentWithStripe",
+            "NewPaymentWithPayoneer",
+            "SentToAccountant",
+            "DownloadedAsPdf",
+            "MarkAsPaidByTheClient",
+            "OpenedAttachment",
+            "NewPaymentWithSquare",
+            "NewPaymentWithKlikAndPay",
+            "NewPaymentWithRazorpay",
+            "NewPaymentWithWepay"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceAttachment": {
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InvoiceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Link": {
+          "type": "string"
+        },
+        "ObfuscatedFileName": {
+          "type": "string"
+        },
+        "OriginalFileName": {
+          "type": "string"
+        },
+        "Size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "Type": {
+          "enum": [
+            "External",
+            "Uploaded"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceAttachmentApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of invoice attachment",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Link": {
+          "description": "Link to the file",
+          "type": "string"
+        },
+        "ObfuscatedFileName": {
+          "description": "Hashed file name to avoid url wildguessing",
+          "type": "string"
+        },
+        "OriginalFileName": {
+          "description": "Name of the file",
+          "type": "string"
+        },
+        "Size": {
+          "description": "File size number in bytes",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Type": {
+          "description": "Type of the link (Attached or external)",
+          "enum": [
+            "External",
+            "Uploaded"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceCreateApiModel": {
+      "properties": {
+        "Attachments": {
+          "description": "List of invoice attachments",
+          "items": {
+            "$ref": "#/definitions/InvoiceUpdateAttachmentApiModel"
+          },
+          "type": "array"
+        },
+        "ClientId": {
+          "description": "The client to whom this invoice is assigned",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ClonedFromId": {
+          "description": "Indicate from which invoice this invoice has been cloned from",
+          "format": "int32",
+          "type": "integer"
+        },
+        "CurrencyId": {
+          "description": "Id of the currency for the invoice amounts",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Duedate": {
+          "description": "Indicates when the invoice will be proclamed as due",
+          "format": "date-time",
+          "type": "string"
+        },
+        "IssuedOn": {
+          "description": "Indicates when the invoice was issued",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Items": {
+          "description": "List of invoice items",
+          "items": {
+            "$ref": "#/definitions/InvoiceCreateItemApiModel"
+          },
+          "type": "array"
+        },
+        "Notes": {
+          "description": "Internal note regarding the invoice",
+          "type": "string"
+        },
+        "Number": {
+          "description": "Unique invoice number",
+          "type": "string"
+        },
+        "PaymentGateways": {
+          "description": "List of enabled payment gateways for this invoice",
+          "items": {
+            "$ref": "#/definitions/InvoiceGatewayApiModel"
+          },
+          "type": "array"
+        },
+        "PoNumber": {
+          "description": "Unique number generated by the buyer",
+          "type": "string"
+        },
+        "RecurringProfile": {
+          "$ref": "#/definitions/InvoiceRecurringApiModel",
+          "description": "Hold the recurring profile"
+        },
+        "RecurringProfileId": {
+          "description": "Hold the id of the recurring profile",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Status": {
+          "description": "Indicate the status of the invoice (paid/unpaid/overdue)",
+          "enum": [
+            "Draft",
+            "Paid",
+            "Unpaid",
+            "Overdue"
+          ],
+          "type": "string"
+        },
+        "Terms": {
+          "description": "Terms of agreement",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceCreateItemApiModel": {
+      "properties": {
+        "Cost": {
+          "description": "Amount per unit",
+          "format": "double",
+          "type": "number"
+        },
+        "Description": {
+          "description": "Additional description attached to the invoice item",
+          "type": "string"
+        },
+        "DiscountPercentage": {
+          "description": "Discount percentage for the overall amount",
+          "format": "double",
+          "type": "number"
+        },
+        "Quantity": {
+          "description": "Quantity in total used for the work type",
+          "format": "double",
+          "type": "number"
+        },
+        "TaxId": {
+          "description": "Tax applied on the item",
+          "format": "int32",
+          "type": "integer"
+        },
+        "TaxPercentage": {
+          "description": "Task percentage. Ex: 18%",
+          "format": "double",
+          "type": "number"
+        },
+        "WorkTypeId": {
+          "description": "Work type (Name of the service)",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceDeleteApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of invoice to be deleted",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceFullDetailsApiModel": {
+      "properties": {
+        "AccessToken": {
+          "description": "Security access token used for accessing the invoice anonymously",
+          "type": "string"
+        },
+        "Activities": {
+          "description": "List of invoice activities. Invoice audit log",
+          "items": {
+            "$ref": "#/definitions/InvoiceActivityApiModel"
+          },
+          "type": "array"
+        },
+        "Attachments": {
+          "description": "List of invoice attachments",
+          "items": {
+            "$ref": "#/definitions/InvoiceAttachmentApiModel"
+          },
+          "type": "array"
+        },
+        "Client": {
+          "$ref": "#/definitions/ClientDetailsApiModel",
+          "description": "Client data referened to this invoice"
+        },
+        "ClonedFromId": {
+          "description": "Indicate from which invoice this invoice has been cloned from",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Currency": {
+          "$ref": "#/definitions/CurrencyDetailsApiModel",
+          "description": "The currency related to this invoice"
+        },
+        "DiscountAmount": {
+          "description": "Amount that goes as a discount",
+          "format": "double",
+          "type": "number"
+        },
+        "Duedate": {
+          "description": "Indicates when the invoice will be proclamed as due",
+          "format": "date-time",
+          "type": "string"
+        },
+        "EnablePartialPayments": {
+          "description": "Indicate that the invoice allows the user to pay the invoice partially",
+          "type": "boolean"
+        },
+        "Id": {
+          "description": "Invoice id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "IssuedOn": {
+          "description": "Indicates when the invoice was issued",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Items": {
+          "description": "List of invoice items",
+          "items": {
+            "$ref": "#/definitions/InvoiceItemApiModel"
+          },
+          "type": "array"
+        },
+        "Notes": {
+          "description": "Internal note regarding the invoice",
+          "type": "string"
+        },
+        "Number": {
+          "description": "Unique invoice number",
+          "type": "string"
+        },
+        "PaymentGateways": {
+          "description": "List of enabled payment gateways for this invoice",
+          "items": {
+            "$ref": "#/definitions/InvoiceGatewayApiModel"
+          },
+          "type": "array"
+        },
+        "Payments": {
+          "description": "List of invoice payments",
+          "items": {
+            "$ref": "#/definitions/InvoicePaymentApiModel"
+          },
+          "type": "array"
+        },
+        "PoNumber": {
+          "description": "Unique number generated by the buyer",
+          "type": "string"
+        },
+        "RecurringProfileId": {
+          "description": "Hold the id of the recurring profile",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Status": {
+          "description": "Indicate the status of the invoice (paid/unpaid/overdue)",
+          "enum": [
+            "Draft",
+            "Paid",
+            "Unpaid",
+            "Overdue"
+          ],
+          "type": "string"
+        },
+        "SubTotalAmount": {
+          "description": "Total amount of the invoice without tax",
+          "format": "double",
+          "type": "number"
+        },
+        "TaxAmount": {
+          "description": "Amount that goes to the tax",
+          "format": "double",
+          "type": "number"
+        },
+        "Terms": {
+          "description": "Terms of agreement",
+          "type": "string"
+        },
+        "TotalAmount": {
+          "description": "Total amount of the invoice with tax",
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceGatewayApiModel": {
+      "properties": {
+        "Name": {
+          "description": "Name of the payment gateway",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceItem": {
+      "properties": {
+        "Cost": {
+          "format": "double",
+          "type": "number"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "DiscountAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "DiscountPercentage": {
+          "format": "double",
+          "type": "number"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InvoiceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Quantity": {
+          "format": "double",
+          "type": "number"
+        },
+        "SubTotalAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "TaxAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "TaxId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "TaxPercentage": {
+          "format": "double",
+          "type": "number"
+        },
+        "TotalAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "WorkTypeId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceItemApiModel": {
+      "properties": {
+        "Cost": {
+          "description": "Amount per unit",
+          "format": "double",
+          "type": "number"
+        },
+        "Description": {
+          "description": "Additional description attached to the invoice item",
+          "type": "string"
+        },
+        "DiscountAmount": {
+          "description": "Amount that goes as a discount",
+          "format": "double",
+          "type": "number"
+        },
+        "DiscountPercentage": {
+          "description": "Discount percentage for the overall amount",
+          "format": "double",
+          "type": "number"
+        },
+        "Id": {
+          "description": "Id of invoice item",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Quantity": {
+          "description": "Quantity in total used for the work type",
+          "format": "double",
+          "type": "number"
+        },
+        "SubTotalAmount": {
+          "description": "Sub-Total amount of the invoice item (Amount without tax)",
+          "format": "double",
+          "type": "number"
+        },
+        "TaxAmount": {
+          "description": "Amount that goes to the tax",
+          "format": "double",
+          "type": "number"
+        },
+        "TaxId": {
+          "description": "Tax applied on the item",
+          "format": "int32",
+          "type": "integer"
+        },
+        "TaxPercentage": {
+          "description": "Task percentage. Ex: 18%",
+          "format": "double",
+          "type": "number"
+        },
+        "TotalAmount": {
+          "description": "Total amount of the invoice item",
+          "format": "double",
+          "type": "number"
+        },
+        "WorkTypeId": {
+          "description": "Work type (Name of the service)",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "InvoicePaymentApiModel": {
+      "properties": {
+        "Amount": {
+          "description": "Total amount of the payment",
+          "format": "double",
+          "type": "number"
+        },
+        "Id": {
+          "description": "Id of invoice payment",
+          "format": "int32",
+          "type": "integer"
+        },
+        "IsAutomatic": {
+          "description": "Indicate if the payment is automatic or manual",
+          "type": "boolean"
+        },
+        "Note": {
+          "description": "Internal payment note",
+          "type": "string"
+        },
+        "PaidOn": {
+          "description": "When the payment was done by the client",
+          "format": "date-time",
+          "type": "string"
+        },
+        "ReferenceId": {
+          "description": "Id of the payment",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Type of payment",
+          "enum": [
+            "Other",
+            "Paypal",
+            "Stripe",
+            "Payoneer",
+            "Bank",
+            "Cash",
+            "Cheque",
+            "Ach",
+            "Sepa",
+            "Square",
+            "KlikAndPay",
+            "Razorpay",
+            "Wepay"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceRecurringApiModel": {
+      "description": "Definition of invoice recurring profile",
+      "properties": {
+        "DayOfMonth": {
+          "description": "Day of month when the recurrance should happen",
+          "format": "int32",
+          "type": "integer"
+        },
+        "DayOfWeek": {
+          "description": "Day when the recurrance should happen",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string"
+        },
+        "DueDateInDays": {
+          "description": "Total number of days for the client to pay the invoice after issuing it",
+          "format": "int32",
+          "type": "integer"
+        },
+        "EndOfRecurrance": {
+          "description": "Indcate the date when the recurrance should stop",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Month": {
+          "description": "Month when the recurrance should happen",
+          "format": "int32",
+          "type": "integer"
+        },
+        "RecurrancePattern": {
+          "description": "How often the recurrance occurs",
+          "enum": [
+            "Daily",
+            "Weekly",
+            "Monthly",
+            "Yearly"
+          ],
+          "type": "string"
+        },
+        "RecurranceValue": {
+          "description": "Recurring every [value] RecurrancePattern\r\nEx: Recur every 1 week",
+          "format": "int32",
+          "type": "integer"
+        },
+        "StartOfRecurrance": {
+          "description": "Indcate the date when the recurrance has started",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Status": {
+          "description": "The status of the recurrance",
+          "enum": [
+            "Pending",
+            "Active",
+            "Cancelled",
+            "Finished"
+          ],
+          "type": "string"
+        },
+        "Title": {
+          "description": "Title of the recurring profile. \r\nEx: BRAND PACKAGE - 2017-08-16 - 2018-08-16",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceUpdateApiModel": {
+      "properties": {
+        "Attachments": {
+          "description": "List of invoice attachments",
+          "items": {
+            "$ref": "#/definitions/InvoiceUpdateAttachmentApiModel"
+          },
+          "type": "array"
+        },
+        "ClientId": {
+          "description": "The client to whom this invoice is assigned",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ClonedFromId": {
+          "description": "Indicate from which invoice this invoice has been cloned from",
+          "format": "int32",
+          "type": "integer"
+        },
+        "CurrencyId": {
+          "description": "Id of the currency for the invoice amounts",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Duedate": {
+          "description": "Indicates when the invoice will be proclamed as due",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Invoice id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "IssuedOn": {
+          "description": "Indicates when the invoice was issued",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Items": {
+          "description": "List of invoice items",
+          "items": {
+            "$ref": "#/definitions/InvoiceCreateItemApiModel"
+          },
+          "type": "array"
+        },
+        "Notes": {
+          "description": "Internal note regarding the invoice",
+          "type": "string"
+        },
+        "Number": {
+          "description": "Unique invoice number",
+          "type": "string"
+        },
+        "PaymentGateways": {
+          "description": "List of enabled payment gateways for this invoice",
+          "items": {
+            "$ref": "#/definitions/InvoiceGatewayApiModel"
+          },
+          "type": "array"
+        },
+        "PoNumber": {
+          "description": "Unique number generated by the buyer",
+          "type": "string"
+        },
+        "RecurringProfile": {
+          "$ref": "#/definitions/InvoiceRecurringApiModel",
+          "description": "Hold the recurring profile"
+        },
+        "RecurringProfileId": {
+          "description": "Hold the id of the recurring profile",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Status": {
+          "description": "Indicate the status of the invoice (paid/unpaid/overdue)",
+          "enum": [
+            "Draft",
+            "Paid",
+            "Unpaid",
+            "Overdue"
+          ],
+          "type": "string"
+        },
+        "Terms": {
+          "description": "Terms of agreement",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceUpdateAttachmentApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of invoice attachment",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Link": {
+          "description": "Link to the file",
+          "type": "string"
+        },
+        "ObfuscatedFileName": {
+          "description": "Hashed file name to avoid url wildguessing",
+          "type": "string"
+        },
+        "OriginalFileName": {
+          "description": "Name of the file",
+          "type": "string"
+        },
+        "Size": {
+          "description": "File size number in bytes",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Type": {
+          "description": "Type of the link (Attached or external)",
+          "enum": [
+            "External",
+            "Uploaded"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InvoiceUriApiModel": {
+      "properties": {
+        "Link": {
+          "description": "Unique link to the invoice",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ListResult[Invoice]": {
+      "properties": {
+        "Count": {
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "ErrorMessages": {
+          "items": {
+            "$ref": "#/definitions/IErrorInfo"
+          },
+          "type": "array"
+        },
+        "IsFaulted": {
+          "type": "boolean"
+        },
+        "Result": {
+          "items": {
+            "$ref": "#/definitions/Invoice"
+          },
+          "type": "array"
+        },
+        "TotalCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Payment": {
+      "properties": {
+        "Amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Invoice": {
+          "$ref": "#/definitions/Invoice"
+        },
+        "InvoiceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "IsAutomatic": {
+          "type": "boolean"
+        },
+        "Note": {
+          "type": "string"
+        },
+        "PaidOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ReferenceId": {
+          "type": "string"
+        },
+        "Type": {
+          "enum": [
+            "Other",
+            "Paypal",
+            "Stripe",
+            "Payoneer",
+            "Bank",
+            "Cash",
+            "Cheque",
+            "Ach",
+            "Sepa",
+            "Square",
+            "KlikAndPay",
+            "Razorpay",
+            "Wepay"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentGateway": {
+      "properties": {
+        "CanDisconnect": {
+          "type": "boolean"
+        },
+        "ClientImportUri": {
+          "type": "string"
+        },
+        "ConnectionType": {
+          "enum": [
+            "OAuth",
+            "InputFields"
+          ],
+          "type": "string"
+        },
+        "ExternalConnectionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Fields": {
+          "items": {
+            "$ref": "#/definitions/PaymentGatewayInputField"
+          },
+          "type": "array"
+        },
+        "IsConnected": {
+          "type": "boolean"
+        },
+        "IsEnabled": {
+          "type": "boolean"
+        },
+        "MaximumAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "MinimumAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "OAuthUri": {
+          "type": "string"
+        },
+        "RefundUri": {
+          "type": "string"
+        },
+        "SupportedCurrencies": {
+          "items": {
+            "$ref": "#/definitions/Currency"
+          },
+          "type": "array"
+        },
+        "SupportsClientsImport": {
+          "type": "boolean"
+        },
+        "SupportsRefund": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentGatewayDetailsApiModel": {
+      "properties": {
+        "Name": {
+          "description": "Name of the payment gateway",
+          "type": "string"
+        },
+        "SupportedCurrencies": {
+          "description": "List of supported currencies.",
+          "items": {
+            "$ref": "#/definitions/CurrencyApiModel"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentGatewayForInvoice": {
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentGatewayInputField": {
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "QueryOptions": {
+      "properties": {
+        "Page": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PageSize": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "QueuedInvoice": {
+      "properties": {
+        "ClonedFromId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Invoice": {
+          "$ref": "#/definitions/Invoice"
+        },
+        "InvoiceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "RecurringProfileId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ScheduledFor": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Status": {
+          "enum": [
+            "Pending",
+            "Cancelled",
+            "Failed",
+            "Processed"
+          ],
+          "type": "string"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "RecurringProfile": {
+      "properties": {
+        "DayOfMonth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "DayOfWeek": {
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string"
+        },
+        "DueDateInDays": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "EndOfRecurrance": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InvoiceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Month": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "RecurrancePattern": {
+          "enum": [
+            "Daily",
+            "Weekly",
+            "Monthly",
+            "Yearly"
+          ],
+          "type": "string"
+        },
+        "RecurranceValue": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "StartOfRecurrance": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Status": {
+          "enum": [
+            "Pending",
+            "Active",
+            "Cancelled",
+            "Finished"
+          ],
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SendInvoiceToAccountantApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of the invoice",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SendInvoiceToClientApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of the invoice",
+          "format": "int32",
+          "type": "integer"
+        },
+        "InvoiceId": {
+          "description": "Id of the invoice",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Message": {
+          "description": "Message to be embedded in the email",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SubscriptionPlan": {
+      "properties": {
+        "CancellatedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "CurrencyCode": {
+          "type": "string"
+        },
+        "ExternalIdentifier": {
+          "type": "string"
+        },
+        "HasDuePayment": {
+          "type": "boolean"
+        },
+        "HasDuePaymentSince": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Identifier": {
+          "type": "string"
+        },
+        "IsActive": {
+          "type": "boolean"
+        },
+        "LastPaymentOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "MaxClients": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "OrderIdentifier": {
+          "type": "string"
+        },
+        "Price": {
+          "format": "double",
+          "type": "number"
+        },
+        "Recurrence": {
+          "enum": [
+            "Monthly",
+            "Yearly"
+          ],
+          "type": "string"
+        },
+        "SaleId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "Status": {
+          "enum": [
+            "ActiveTrial",
+            "ExpiredTrial",
+            "Active",
+            "Canceled",
+            "Fraudlent"
+          ],
+          "type": "string"
+        },
+        "SystemCancelationReason": {
+          "enum": [
+            "FailToCaptureFee",
+            "Fraud"
+          ],
+          "type": "string"
+        },
+        "TrialEndsOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "TrialNumberOfDays": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "TrialStartsOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tax": {
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Percentage": {
+          "format": "double",
+          "type": "number"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "TaxCreateApiModel": {
+      "properties": {
+        "Name": {
+          "description": "Name of the task",
+          "type": "string"
+        },
+        "Percentage": {
+          "description": "Task percentage. Ex: 18%",
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "TaxDeleteApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of tax to be deleted",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "TaxDetailsApiModel": {
+      "properties": {
+        "CreatedOn": {
+          "description": "Date of creation",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Name of the task",
+          "type": "string"
+        },
+        "Percentage": {
+          "description": "Task percentage. Ex: 18%",
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "TaxUpdateApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Name of the task",
+          "type": "string"
+        },
+        "Percentage": {
+          "description": "Task percentage. Ex: 18%",
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "UILanguageDetailsApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Name of the country",
+          "type": "string"
+        },
+        "UiCulture": {
+          "description": "Ui culture options",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UiLanguage": {
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "UiCulture": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "User": {
+      "properties": {
+        "ActionNotificationsLastReadOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "ExternalConnections": {
+          "items": {
+            "$ref": "#/definitions/ExternalConnection"
+          },
+          "type": "array"
+        },
+        "HasBeenOnboarded": {
+          "type": "boolean"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "IsLocked": {
+          "type": "boolean"
+        },
+        "IsVerified": {
+          "type": "boolean"
+        },
+        "KnowledgeNotificationsLastReadOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "LastSeenOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "PasswordSalt": {
+          "type": "string"
+        },
+        "ReferralPath": {
+          "type": "string"
+        },
+        "ReferredUsers": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ReferrerKey": {
+          "type": "string"
+        },
+        "Settings": {
+          "$ref": "#/definitions/UserSettings"
+        },
+        "Status": {
+          "enum": [
+            "Normal",
+            "Fraudlent",
+            "Locked"
+          ],
+          "type": "string"
+        },
+        "SubscriptionPlan": {
+          "$ref": "#/definitions/SubscriptionPlan"
+        },
+        "Type": {
+          "enum": [
+            "Anonymous",
+            "Customer",
+            "SystemAdministrator",
+            "Collaborator"
+          ],
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "VerifiedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "YearsOfExperience": {
+          "enum": [
+            "One",
+            "OneToThree",
+            "ThreeToFive",
+            "SixPlus"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UserSettings": {
+      "properties": {
+        "AccountantEmail": {
+          "type": "string"
+        },
+        "Address": {
+          "type": "string"
+        },
+        "ApiKey": {
+          "type": "string"
+        },
+        "ApiSecret": {
+          "type": "string"
+        },
+        "BackgroundImage": {
+          "type": "string"
+        },
+        "Bank": {
+          "type": "string"
+        },
+        "BankAccount": {
+          "type": "string"
+        },
+        "Country": {
+          "$ref": "#/definitions/Country"
+        },
+        "CountryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Currency": {
+          "$ref": "#/definitions/Currency"
+        },
+        "CurrencyId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "CurrencySymbol": {
+          "type": "string"
+        },
+        "EnablePredictiveInvoicing": {
+          "type": "boolean"
+        },
+        "EnableRecurringInvoicing": {
+          "type": "boolean"
+        },
+        "HasInvoiceLogo": {
+          "type": "boolean"
+        },
+        "Iban": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PhoneNumber": {
+          "type": "string"
+        },
+        "Profession": {
+          "enum": [
+            "Other",
+            "DesignAndCreative",
+            "SoftwareDevelopment",
+            "ContentWritingAndMarketing",
+            "Freelancers",
+            "Consultants",
+            "Smes",
+            "Enterprise",
+            "ECommerce"
+          ],
+          "type": "string"
+        },
+        "ReceiveSmsNotifications": {
+          "type": "boolean"
+        },
+        "ReferralProgram": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string"
+        },
+        "SubscribeToProductEmails": {
+          "type": "boolean"
+        },
+        "Swift": {
+          "type": "string"
+        },
+        "Terms": {
+          "type": "string"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "VatNumber": {
+          "type": "string"
+        },
+        "YearsOfExperience": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "WorkType": {
+      "properties": {
+        "Id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "UserId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "WorkTypeCreateApiModel": {
+      "properties": {
+        "Title": {
+          "description": "Indicates the title of of the work type (Logo design, development...)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WorkTypeDeleteApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Id of work type to be deleted",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "WorkTypeDetailsApiModel": {
+      "properties": {
+        "CreatedOn": {
+          "description": "Date of creation",
+          "format": "date-time",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Title": {
+          "description": "Indicates the title of of the work type (Logo design, development...)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WorkTypeUpdateApiModel": {
+      "properties": {
+        "Id": {
+          "description": "Entity id",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Title": {
+          "description": "Indicates the title of of the work type (Logo design, development...)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
